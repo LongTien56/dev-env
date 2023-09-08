@@ -2,11 +2,11 @@ module "ec2_instance" {
   source  = "terraform-aws-modules/ec2-instance/aws"
 
   name = "single-instance"
-
+  ami = var.ami
   instance_type          = var.instance_type
   key_name               = aws_key_pair.key_pair.key_name
 #  monitoring             = true
-  associate_public_ip_address = true
+#   associate_public_ip_address = true
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
   subnet_id              = module.vpc.public_subnets[1]
 
@@ -15,7 +15,6 @@ module "ec2_instance" {
     Environment = "dev"
   }
 }
-
 
 resource "tls_private_key" "key" {
   algorithm = "RSA"
@@ -29,11 +28,9 @@ resource "local_sensitive_file" "private_key" {
 
 
 resource "aws_key_pair" "key_pair" {
-  key_name   = "mykey-key"
+  key_name   = "mykey"
   public_key = tls_private_key.key.public_key_openssh
 }
-
-
 
 
 resource "aws_ebs_volume" "ebs-volume-1" {
@@ -50,3 +47,17 @@ resource "aws_volume_attachment" "ebs_volume_attacthment"{
     volume_id = aws_ebs_volume.ebs-volume-1.id
     instance_id = module.ec2_instance.id
 }
+
+
+resource "aws_eip" "eip" {
+  instance = module.ec2_instance.id
+  vpc      = true
+  tags = {
+        Name = "EIP for EC2"
+  }
+}
+
+# resource "aws_eip_association" "eip-association" {
+#   instance_id   = module.ec2_instance.id
+#   allocation_id = aws_eip.eip.id
+# }

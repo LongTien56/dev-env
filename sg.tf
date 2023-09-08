@@ -1,18 +1,11 @@
 resource "aws_security_group" "alb_sg" {
-  name        = "allow_tls"
+  name        = "alb_sg"
   description = "Allow TLS inbound traffic"
   vpc_id      = module.vpc.vpc_id
 
   ingress {
     from_port   = 80
     to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -33,12 +26,12 @@ resource "aws_security_group" "alb_sg" {
   }
 
   tags = {
-    Name = "allow_tls"
+    Name = "alb_sg"
   }
 }
 
 resource "aws_security_group" "ec2_sg" {
-  name        = "allow_sg"
+  name        = "ec2_sg"
   description = "Allow TLS inbound traffic"
   vpc_id      = module.vpc.vpc_id
 
@@ -53,7 +46,8 @@ resource "aws_security_group" "ec2_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    security_groups = [aws_security_group.alb_sg.id]
+    cidr_blocks = ["183.91.3.171/32", "118.70.135.21/32"]
+    # cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
@@ -76,19 +70,22 @@ resource "aws_security_group" "ec2_sg" {
   }
 }
 
-resource "aws_security_group" "rds_sg" {
-  name = "rds_sg"
-  vpc_id      = module.vpc.vpc_id
-  ingress {
-    from_port       = 3306
-    to_port         = 3306
-    protocol        = "tcp"
-    security_groups = [aws_security_group.ec2_sg.id]
-  }
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
+# resource "aws_security_group" "rds_sg" {
+#   name = "rds_sg"
+#   vpc_id      = module.vpc.vpc_id
+#   ingress {
+#     from_port       = 3306
+#     to_port         = 3306
+#     protocol        = "tcp"
+#     security_groups = [aws_security_group.ec2_sg.id]
+#   }
+#   egress {
+#     from_port   = 0
+#     to_port     = 0
+#     protocol    = "-1"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
+#     tags = {
+#     Name = "rds_sg"
+#   }
+#}

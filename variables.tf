@@ -8,8 +8,14 @@ variable "region" {
 
 #ec2
 variable "instance_type" {
-  default     = "t2.micro"
+  default     = "t3.small"
   description = "EC2 instance type"
+  type        = string
+}
+
+variable "ami" {
+  default     = "ami-0df7a207adb9748c7"
+  description = "EC2 ami"
   type        = string
 }
 
