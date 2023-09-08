@@ -9,7 +9,11 @@ module "ec2_instance" {
 #   associate_public_ip_address = true
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
   subnet_id              = var.subnets[0]
-
+  root_block_device= [{
+    volume_type = var.ebs_volume_type
+    volume_size = var.ebs_volume_size
+  }
+  ]
   tags = {
     Terraform   = "true"
     Environment = "dev"
@@ -33,20 +37,20 @@ resource "aws_key_pair" "key_pair" {
 }
 
 
-resource "aws_ebs_volume" "ebs-volume-1" {
-    availability_zone = module.ec2_instance.availability_zone
-    size = var.ebs_volume_size
-    type = var.ebs_volume_type
-    tags = {
-        Name = "Ec2 extra volume"
-    }
-}
+# resource "aws_ebs_volume" "ebs-volume-1" {
+#     availability_zone = module.ec2_instance.availability_zone
+#     size = var.ebs_volume_size
+#     type = var.ebs_volume_type
+#     tags = {
+#         Name = "Ec2 extra volume"
+#     }
+# }
 
-resource "aws_volume_attachment" "ebs_volume_attacthment"{
-    device_name = "/dev/xvdh"
-    volume_id = aws_ebs_volume.ebs-volume-1.id
-    instance_id = module.ec2_instance.id
-}
+# resource "aws_volume_attachment" "ebs_volume_attacthment"{
+#     device_name = "/dev/xvdh"
+#     volume_id = aws_ebs_volume.ebs-volume-1.id
+#     instance_id = module.ec2_instance.id
+# }
 
 
 resource "aws_eip" "eip" {
