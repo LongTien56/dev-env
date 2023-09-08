@@ -5,7 +5,7 @@ module "alb" {
   name = "test-hblab"
 
   load_balancer_type = "application"
-
+  create_security_group = false
   vpc_id             = var.vpc_id
   subnets            = [ for subnet_id in var.subnets : subnet_id ]
   security_groups    = [aws_security_group.alb_sg.id]
