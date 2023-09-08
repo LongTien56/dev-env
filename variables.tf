@@ -28,7 +28,7 @@ variable "instance_type" {
 }
 
 variable "ami" {
-  default     = "ami-0df7a207adb9748c7"
+  default     = "ami-07d6bd9a28134d3b3"
   description = "EC2 ami"
   type        = string
 }
@@ -46,7 +46,7 @@ variable "ebs_volume_type" {
 
 #alb
 variable "alb_cert_arn" {
-  default     = "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:loadbalancer/app/itoen-alb/c2773c8ca76d7a61"
+  default     = "arn:aws:acm:ap-northeast-1:185886701365:certificate/2600d11c-fa95-45b7-9aa6-f35e9de56126"
   description = "Alb cert arn"
   type        = string
 }

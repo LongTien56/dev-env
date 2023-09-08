@@ -53,7 +53,7 @@ resource "aws_eip" "eip" {
   instance = module.ec2_instance.id
   vpc      = true
   tags = {
-        Name = "EIP for EC2"
+        Name = "hblab-test"
   }
 }
 
