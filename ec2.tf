@@ -1,14 +1,14 @@
 module "ec2_instance" {
   source  = "terraform-aws-modules/ec2-instance/aws"
 
-  name = "single-instance"
+  name = "test-hblab"
   ami = var.ami
   instance_type          = var.instance_type
   key_name               = aws_key_pair.key_pair.key_name
 #  monitoring             = true
 #   associate_public_ip_address = true
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
-  subnet_id              = module.vpc.public_subnets[1]
+  subnet_id              = var.subnets[0]
 
   tags = {
     Terraform   = "true"
@@ -21,14 +21,14 @@ resource "tls_private_key" "key" {
 }
 
 resource "local_sensitive_file" "private_key" {
-  filename        = "${path.module}/mykey.pem"
+  filename        = "${path.module}/test-hblab.pem"
   content         = tls_private_key.key.private_key_pem
   file_permission = "0400"
 }
 
 
 resource "aws_key_pair" "key_pair" {
-  key_name   = "mykey"
+  key_name   = "test-hblab"
   public_key = tls_private_key.key.public_key_openssh
 }
 

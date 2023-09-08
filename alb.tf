@@ -2,14 +2,13 @@ module "alb" {
   source  = "terraform-aws-modules/alb/aws"
   version = "~> 8.0"
 
-  name = "my-alb"
+  name = "test-hblab"
 
   load_balancer_type = "application"
 
-  vpc_id             = module.vpc.vpc_id
-  subnets            = [module.vpc.public_subnets[0], module.vpc.public_subnets[1], module.vpc.public_subnets[2]]
+  vpc_id             = var.vpc_id
+  subnets            = [ for subnet_id in var.subnets : subnet_id ]
   security_groups    = [aws_security_group.alb_sg.id]
-
 #   access_logs = {
 #     bucket = "my-alb-logs"
 #   }
@@ -42,14 +41,14 @@ module "alb" {
     }
   ]
 
-#   https_listeners = [
-#     {
-#       port               = 443
-#       protocol           = "HTTPS"
-#       certificate_arn    = var.alb_cert_arn
-#       target_group_index = 0
-#     }
-#   ]
+  https_listeners = [
+    {
+      port               = 443
+      protocol           = "HTTPS"
+      certificate_arn    = var.alb_cert_arn
+      target_group_index = 0
+    }
+  ]
 
   http_tcp_listeners = [
     {

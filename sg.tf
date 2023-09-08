@@ -1,7 +1,7 @@
 resource "aws_security_group" "alb_sg" {
   name        = "alb_sg"
   description = "Allow TLS inbound traffic"
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = var.vpc_id
 
   ingress {
     from_port   = 80
@@ -33,7 +33,7 @@ resource "aws_security_group" "alb_sg" {
 resource "aws_security_group" "ec2_sg" {
   name        = "ec2_sg"
   description = "Allow TLS inbound traffic"
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = var.vpc_id
 
   ingress {
     from_port   = 80
