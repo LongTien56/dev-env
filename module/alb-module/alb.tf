@@ -7,8 +7,8 @@ module "alb" {
   load_balancer_type = "application"
   create_security_group = false
   vpc_id             = var.vpc_id
-  subnets            = [ for subnet_id in var.subnets : subnet_id ]
-  security_groups    = [aws_security_group.alb_sg.id]
+  subnets            = [ for subnet_id in var.subnets_id : subnet_id ]
+  security_groups    = [ var.security_group_id ]
 #   access_logs = {
 #     bucket = "my-alb-logs"
 #   }
@@ -21,7 +21,7 @@ module "alb" {
       target_type      = "instance"
       targets = {
         my_target = {
-          target_id = module.ec2_instance.id
+          target_id = var.ec2_instance_id
           port = 80
         }
       }
@@ -166,7 +166,5 @@ module "alb" {
 #         }
 
 # }
-
-
 
 

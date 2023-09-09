@@ -2,16 +2,16 @@ module "ec2_instance" {
   source  = "terraform-aws-modules/ec2-instance/aws"
 
   name = "test-hblab"
-  ami = var.ami
+  ami = var.ec2_ami_id
   instance_type          = var.instance_type
   key_name               = aws_key_pair.key_pair.key_name
 #  monitoring             = true
 #   associate_public_ip_address = true
-  vpc_security_group_ids = [aws_security_group.ec2_sg.id]
-  subnet_id              = var.subnets[0]
+  vpc_security_group_ids = [var.ec2_sg_group]
+  subnet_id              = var.subnet
   root_block_device= [{
-    volume_type = var.ebs_volume_type
-    volume_size = var.ebs_volume_size
+    volume_type = var.ec2_volume_type
+    volume_size = var.ec2_volume_size
   }
   ]
   tags = {
