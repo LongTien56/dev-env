@@ -1,0 +1,1261 @@
+{
+  "version": 4,
+  "terraform_version": "1.4.0",
+  "serial": 811,
+  "lineage": "1fe1038a-e5ce-28a6-01ec-6ddb5f3c26d9",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "aws_eip",
+      "name": "eip",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "address": null,
+            "allocation_id": "eipalloc-0d5d68488bca45a40",
+            "associate_with_private_ip": null,
+            "association_id": "eipassoc-002645167d3132bbf",
+            "carrier_ip": "",
+            "customer_owned_ip": "",
+            "customer_owned_ipv4_pool": "",
+            "domain": "vpc",
+            "id": "eipalloc-0d5d68488bca45a40",
+            "instance": "i-07b5416e8a4b9bd02",
+            "network_border_group": "ap-northeast-1",
+            "network_interface": "eni-0211357bc7546b183",
+            "private_dns": "ip-172-31-30-243.ap-northeast-1.compute.internal",
+            "private_ip": "172.31.30.243",
+            "public_dns": "ec2-52-69-108-123.ap-northeast-1.compute.amazonaws.com",
+            "public_ip": "52.69.108.123",
+            "public_ipv4_pool": "amazon",
+            "tags": {
+              "Name": "hblab-test"
+            },
+            "tags_all": {
+              "Name": "hblab-test"
+            },
+            "timeouts": null,
+            "vpc": true
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiZGVsZXRlIjoxODAwMDAwMDAwMDAsInJlYWQiOjkwMDAwMDAwMDAwMCwidXBkYXRlIjozMDAwMDAwMDAwMDB9fQ==",
+          "dependencies": [
+            "aws_key_pair.key_pair",
+            "aws_security_group.alb_sg",
+            "aws_security_group.ec2_sg",
+            "module.ec2_instance.aws_iam_instance_profile.this",
+            "module.ec2_instance.aws_iam_role.this",
+            "module.ec2_instance.aws_instance.ignore_ami",
+            "module.ec2_instance.aws_instance.this",
+            "module.ec2_instance.aws_spot_instance_request.this",
+            "module.ec2_instance.data.aws_iam_policy_document.assume_role_policy",
+            "module.ec2_instance.data.aws_partition.current",
+            "module.ec2_instance.data.aws_ssm_parameter.this",
+            "tls_private_key.key"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_key_pair",
+      "name": "key_pair",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:ap-northeast-1:185886701365:key-pair/test-hblab",
+            "fingerprint": "f9:e6:fb:a7:a3:a9:9f:db:4f:16:f3:08:d7:0a:e9:b1",
+            "id": "test-hblab",
+            "key_name": "test-hblab",
+            "key_name_prefix": "",
+            "key_pair_id": "key-002afd4fb0bced678",
+            "key_type": "rsa",
+            "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAMwSI4yzyRyxmWOr80mDnJqe0JLI56CaWAYtIRUl21AGtW7zML14TZ0oFoFNViipZXkShO/6Bmij+nmNpeZ4OG3ryATjt1oEblIRYg4ks8XeWp/MP/+j4I2ppTOTcxogVzZkiT8W//DbMFJHsgz0LAnCBB5GygIxvaU8rqHT2dhByirGZSGPKkiEBh8UzQHXKbjUuNQk+hbmnJaminoc1I1Ha0gQeP9KjADRaVWJCpk2ZQwuqtalKSZOGUONeNK0qdGPTv9ZxNtHF3l/XY4UrakdEDWpnk2mzsyBueS0Dt2zjXF5cfPFaJkVk0dl8ickDVWr2iVt15rl0pHhwkPSl",
+            "tags": {},
+            "tags_all": {}
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "tls_private_key.key"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "alb_sg",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:ap-northeast-1:185886701365:security-group/sg-054fb5d15f16f573c",
+            "description": "Allow TLS inbound traffic",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "",
+                "from_port": 0,
+                "ipv6_cidr_blocks": [
+                  "::/0"
+                ],
+                "prefix_list_ids": [],
+                "protocol": "-1",
+                "security_groups": [],
+                "self": false,
+                "to_port": 0
+              }
+            ],
+            "id": "sg-054fb5d15f16f573c",
+            "ingress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "",
+                "from_port": 443,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 443
+              },
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "",
+                "from_port": 80,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 80
+              }
+            ],
+            "name": "alb_sg",
+            "name_prefix": "",
+            "owner_id": "185886701365",
+            "revoke_rules_on_delete": false,
+            "tags": {
+              "Name": "alb_sg"
+            },
+            "tags_all": {
+              "Name": "alb_sg"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-055e455a5931b6e40"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "ec2_sg",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:ap-northeast-1:185886701365:security-group/sg-008920b9c161d7093",
+            "description": "Allow TLS inbound traffic",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "",
+                "from_port": 0,
+                "ipv6_cidr_blocks": [
+                  "::/0"
+                ],
+                "prefix_list_ids": [],
+                "protocol": "-1",
+                "security_groups": [],
+                "self": false,
+                "to_port": 0
+              }
+            ],
+            "id": "sg-008920b9c161d7093",
+            "ingress": [
+              {
+                "cidr_blocks": [
+                  "183.91.3.171/32",
+                  "118.70.135.21/32"
+                ],
+                "description": "",
+                "from_port": 22,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 22
+              },
+              {
+                "cidr_blocks": [],
+                "description": "",
+                "from_port": 443,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [
+                  "sg-054fb5d15f16f573c"
+                ],
+                "self": false,
+                "to_port": 443
+              },
+              {
+                "cidr_blocks": [],
+                "description": "",
+                "from_port": 80,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [
+                  "sg-054fb5d15f16f573c"
+                ],
+                "self": false,
+                "to_port": 80
+              }
+            ],
+            "name": "ec2_sg",
+            "name_prefix": "",
+            "owner_id": "185886701365",
+            "revoke_rules_on_delete": false,
+            "tags": {
+              "Name": "ec2_sg"
+            },
+            "tags_all": {
+              "Name": "ec2_sg"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-055e455a5931b6e40"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "aws_security_group.alb_sg"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "local_sensitive_file",
+      "name": "private_key",
+      "provider": "provider[\"registry.terraform.io/hashicorp/local\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "content": "-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAwDMEiOMs8kcsZljq/NJg5yantCSyOegmlgGLSEVJdtQBrVu8\nzC9eE2dKBaBTVYoqWV5EoTv+gZoo/p5jaXmeDht68gE47daBG5SEWIOJLPF3lqfz\nD//o+CNqaUzk3MaIFc2ZIk/Fv/w2zBSR7IM9CwJwgQeRsoCMb2lPK6h09nYQcoqx\nmUhjypIhAYfFM0B1ym41LjUJPoW5pyWpop6HNSNR2tIEHj/SowA0WlViQqZNmUML\nqrWpSkmThlDjXjStKnRj07/WcTbRxd5f12OFK2pHRA1qZ5Nps7MgbnktA7ds41xe\nXHzxWiZFZNHZfInJA1Vq9olbdea5dKR4cJD0pQIDAQABAoIBAB/iVsY+qZ4noH36\nEkGOxPSTvQ5taAOjN4N7DhgXJnDICt8vcMqOsRSW9fio+CogmZXpxYjZ4watBE/5\nBpTg0A+XD3ZGLaOHCjQBF1N3vrHt/ODJS9FDquo/Nc/yKaVWagzz5ouCoFORC6Yf\nY3XQ77d72B4Pm2P5X1K8LZ4YfA7Gjal0KEGz1E7fZe+DSlXmYltrKPNRG+pyjoua\np9ksJK+oIwzDuXr1q0FYCh1PxSmIjcW9YXBcm/qIIiSpbP79/aNg1DQlsiCSgji/\nA2MQ/B1lqkmLP15dkSJ+OVfroe2w+LIHVNMk46SxMRDheLbFB3m7VSPf0EXY4E22\noM7PiaECgYEA4PaRCyz5YCa9XIiGulv9JEBGHF/CFdiTMIwXZH9haKfnVPsrQIHU\nBUkCjEQf8QfF0rKFkmHW7W49gk+VOC27Alk9YQ9/rjP/N801LpqHFbW8bej5wgIy\nR8HCmQkKubr4B2pgdDQdugZF+rym2eAgjmoXWnWmlMP6PeNxgM/Em48CgYEA2rdF\nJdBtY6Wgqb/NwtqjAaBxdbXpdLovu9JQr0pTlhRfhtYSvl4W4znjxJf0NOtv2VEY\n2rog8G+ip/0BtGjqxViA3PmEAyuW2lGLVPrTyhsHhbyGKuatDxs1YiRTR+1RbI9m\nX3TPtC6nFCsHK38T79fnoKDK8YLNogdVqbOgoosCgYAb/jKAPIFveIKZsBdruySd\nzS2sPDIve7qdEOGcTMl3N2Vuyq5QIZebbMFXaOa8nGX+WN6MH4aaFtyqiXKdAfvC\nSA5+NGqD5857SBq1CN+EUQ/4cUQa4yEUksS/PEPMZrqUWaVU8GM+kadFkxIEDIKg\nlgz/4aHv4w8RgmrOR4xEewKBgQC6jfAxHOLxR+kOYUfEmHDJhmzAlnWW1ui4L+Aa\nZC9/p8kDXb2HGwIytsIMggAO03MHziCBEJnf+5il6Sx3EbaOtbrUwQ9VFO0LMtrB\nlWDo1r1H2VInbbLXW8HhAFL42vfEvVv4t84iRljE3x6yfyYmQeaUIBJ6hbOYLOFo\naortmQKBgQCd7+aHti7Gzhl4qxfZAFnj7I+SgaQh78sJUV9zuuLG+NuuyekXVaCY\nxjJqvWmX7YUagG2Oz2EzSh0ju0jf1FmT/f5WyLJgqOVXMHrxw05Q8NPJMV2Bq1YL\n+iioMLIYnC8ssSRHZYaYR66RLjqKDcx80HY7ZjrWoI1FK7knkD9YlQ==\n-----END RSA PRIVATE KEY-----\n",
+            "content_base64": null,
+            "content_base64sha256": "n/e2w/PvWf+Rdr8B4CZv2lMerSvfXaKzotuQRXyXr7Q=",
+            "content_base64sha512": "u0DaclNJa48zJSk2YpHcZlyy/uU727vEaIrK/xxzyVrn5NnzHYNinfcRsFDgeFcgy3R+yPLzS9BKLqBP3azz3w==",
+            "content_md5": "a0b4157966d4fc13225f9853816a49a7",
+            "content_sha1": "d1279f3770302dd215490c351c128e2f33f1ea83",
+            "content_sha256": "9ff7b6c3f3ef59ff9176bf01e0266fda531ead2bdf5da2b3a2db90457c97afb4",
+            "content_sha512": "bb40da7253496b8f332529366291dc665cb2fee53bdbbbc4688acaff1c73c95ae7e4d9f31d83629df711b050e0785720cb747ec8f2f34bd04a2ea04fddacf3df",
+            "directory_permission": "0700",
+            "file_permission": "0400",
+            "filename": "./test-hblab.pem",
+            "id": "d1279f3770302dd215490c351c128e2f33f1ea83",
+            "source": null
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "content"
+              }
+            ]
+          ],
+          "dependencies": [
+            "tls_private_key.key"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "tls_private_key",
+      "name": "key",
+      "provider": "provider[\"registry.terraform.io/hashicorp/tls\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "algorithm": "RSA",
+            "ecdsa_curve": "P224",
+            "id": "d8835448e75c1e7908c89dc36b9f180c06871c84",
+            "private_key_openssh": "-----BEGIN OPENSSH PRIVATE KEY-----\nb3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABFwAAAAdz\nc2gtcnNhAAAAAwEAAQAAAQEAwDMEiOMs8kcsZljq/NJg5yantCSyOegmlgGLSEVJ\ndtQBrVu8zC9eE2dKBaBTVYoqWV5EoTv+gZoo/p5jaXmeDht68gE47daBG5SEWIOJ\nLPF3lqfzD//o+CNqaUzk3MaIFc2ZIk/Fv/w2zBSR7IM9CwJwgQeRsoCMb2lPK6h0\n9nYQcoqxmUhjypIhAYfFM0B1ym41LjUJPoW5pyWpop6HNSNR2tIEHj/SowA0WlVi\nQqZNmUMLqrWpSkmThlDjXjStKnRj07/WcTbRxd5f12OFK2pHRA1qZ5Nps7Mgbnkt\nA7ds41xeXHzxWiZFZNHZfInJA1Vq9olbdea5dKR4cJD0pQAAA7jnMzWr5zM1qwAA\nAAdzc2gtcnNhAAABAQDAMwSI4yzyRyxmWOr80mDnJqe0JLI56CaWAYtIRUl21AGt\nW7zML14TZ0oFoFNViipZXkShO/6Bmij+nmNpeZ4OG3ryATjt1oEblIRYg4ks8XeW\np/MP/+j4I2ppTOTcxogVzZkiT8W//DbMFJHsgz0LAnCBB5GygIxvaU8rqHT2dhBy\nirGZSGPKkiEBh8UzQHXKbjUuNQk+hbmnJaminoc1I1Ha0gQeP9KjADRaVWJCpk2Z\nQwuqtalKSZOGUONeNK0qdGPTv9ZxNtHF3l/XY4UrakdEDWpnk2mzsyBueS0Dt2zj\nXF5cfPFaJkVk0dl8ickDVWr2iVt15rl0pHhwkPSlAAAAAwEAAQAAAQAf4lbGPqme\nJ6B9+hJBjsT0k70ObWgDozeDew4YFyZwyArfL3DKjrEUlvX4qPgqIJmV6cWI2eMG\nrQRP+QaU4NAPlw92Ri2jhwo0ARdTd76x7fzgyUvRQ6rqPzXP8imlVmoM8+aLgqBT\nkQumH2N10O+3e9geD5tj+V9SvC2eGHwOxo2pdChBs9RO32Xvg0pV5mJbayjzURvq\nco6LmqfZLCSvqCMMw7l69atBWAodT8UpiI3FvWFwXJv6iCIkqWz+/f2jYNQ0JbIg\nkoI4vwNjEPwdZapJiz9eXZEifjlX66HtsPiyB1TTJOOksTEQ4Xi2xQd5u1Uj39BF\n2OBNtqDOz4mhAAAAgQCd7+aHti7Gzhl4qxfZAFnj7I+SgaQh78sJUV9zuuLG+Nuu\nyekXVaCYxjJqvWmX7YUagG2Oz2EzSh0ju0jf1FmT/f5WyLJgqOVXMHrxw05Q8NPJ\nMV2Bq1YL+iioMLIYnC8ssSRHZYaYR66RLjqKDcx80HY7ZjrWoI1FK7knkD9YlQAA\nAIEA4PaRCyz5YCa9XIiGulv9JEBGHF/CFdiTMIwXZH9haKfnVPsrQIHUBUkCjEQf\n8QfF0rKFkmHW7W49gk+VOC27Alk9YQ9/rjP/N801LpqHFbW8bej5wgIyR8HCmQkK\nubr4B2pgdDQdugZF+rym2eAgjmoXWnWmlMP6PeNxgM/Em48AAACBANq3RSXQbWOl\noKm/zcLaowGgcXW16XS6L7vSUK9KU5YUX4bWEr5eFuM548SX9DTrb9lRGNq6IPBv\noqf9AbRo6sVYgNz5hAMrltpRi1T608obB4W8hirmrQ8bNWIkU0ftUWyPZl90z7Qu\npxQrByt/E+/X56CgyvGCzaIHVamzoKKLAAAAAAEC\n-----END OPENSSH PRIVATE KEY-----\n",
+            "private_key_pem": "-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAwDMEiOMs8kcsZljq/NJg5yantCSyOegmlgGLSEVJdtQBrVu8\nzC9eE2dKBaBTVYoqWV5EoTv+gZoo/p5jaXmeDht68gE47daBG5SEWIOJLPF3lqfz\nD//o+CNqaUzk3MaIFc2ZIk/Fv/w2zBSR7IM9CwJwgQeRsoCMb2lPK6h09nYQcoqx\nmUhjypIhAYfFM0B1ym41LjUJPoW5pyWpop6HNSNR2tIEHj/SowA0WlViQqZNmUML\nqrWpSkmThlDjXjStKnRj07/WcTbRxd5f12OFK2pHRA1qZ5Nps7MgbnktA7ds41xe\nXHzxWiZFZNHZfInJA1Vq9olbdea5dKR4cJD0pQIDAQABAoIBAB/iVsY+qZ4noH36\nEkGOxPSTvQ5taAOjN4N7DhgXJnDICt8vcMqOsRSW9fio+CogmZXpxYjZ4watBE/5\nBpTg0A+XD3ZGLaOHCjQBF1N3vrHt/ODJS9FDquo/Nc/yKaVWagzz5ouCoFORC6Yf\nY3XQ77d72B4Pm2P5X1K8LZ4YfA7Gjal0KEGz1E7fZe+DSlXmYltrKPNRG+pyjoua\np9ksJK+oIwzDuXr1q0FYCh1PxSmIjcW9YXBcm/qIIiSpbP79/aNg1DQlsiCSgji/\nA2MQ/B1lqkmLP15dkSJ+OVfroe2w+LIHVNMk46SxMRDheLbFB3m7VSPf0EXY4E22\noM7PiaECgYEA4PaRCyz5YCa9XIiGulv9JEBGHF/CFdiTMIwXZH9haKfnVPsrQIHU\nBUkCjEQf8QfF0rKFkmHW7W49gk+VOC27Alk9YQ9/rjP/N801LpqHFbW8bej5wgIy\nR8HCmQkKubr4B2pgdDQdugZF+rym2eAgjmoXWnWmlMP6PeNxgM/Em48CgYEA2rdF\nJdBtY6Wgqb/NwtqjAaBxdbXpdLovu9JQr0pTlhRfhtYSvl4W4znjxJf0NOtv2VEY\n2rog8G+ip/0BtGjqxViA3PmEAyuW2lGLVPrTyhsHhbyGKuatDxs1YiRTR+1RbI9m\nX3TPtC6nFCsHK38T79fnoKDK8YLNogdVqbOgoosCgYAb/jKAPIFveIKZsBdruySd\nzS2sPDIve7qdEOGcTMl3N2Vuyq5QIZebbMFXaOa8nGX+WN6MH4aaFtyqiXKdAfvC\nSA5+NGqD5857SBq1CN+EUQ/4cUQa4yEUksS/PEPMZrqUWaVU8GM+kadFkxIEDIKg\nlgz/4aHv4w8RgmrOR4xEewKBgQC6jfAxHOLxR+kOYUfEmHDJhmzAlnWW1ui4L+Aa\nZC9/p8kDXb2HGwIytsIMggAO03MHziCBEJnf+5il6Sx3EbaOtbrUwQ9VFO0LMtrB\nlWDo1r1H2VInbbLXW8HhAFL42vfEvVv4t84iRljE3x6yfyYmQeaUIBJ6hbOYLOFo\naortmQKBgQCd7+aHti7Gzhl4qxfZAFnj7I+SgaQh78sJUV9zuuLG+NuuyekXVaCY\nxjJqvWmX7YUagG2Oz2EzSh0ju0jf1FmT/f5WyLJgqOVXMHrxw05Q8NPJMV2Bq1YL\n+iioMLIYnC8ssSRHZYaYR66RLjqKDcx80HY7ZjrWoI1FK7knkD9YlQ==\n-----END RSA PRIVATE KEY-----\n",
+            "private_key_pem_pkcs8": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDAMwSI4yzyRyxm\nWOr80mDnJqe0JLI56CaWAYtIRUl21AGtW7zML14TZ0oFoFNViipZXkShO/6Bmij+\nnmNpeZ4OG3ryATjt1oEblIRYg4ks8XeWp/MP/+j4I2ppTOTcxogVzZkiT8W//DbM\nFJHsgz0LAnCBB5GygIxvaU8rqHT2dhByirGZSGPKkiEBh8UzQHXKbjUuNQk+hbmn\nJaminoc1I1Ha0gQeP9KjADRaVWJCpk2ZQwuqtalKSZOGUONeNK0qdGPTv9ZxNtHF\n3l/XY4UrakdEDWpnk2mzsyBueS0Dt2zjXF5cfPFaJkVk0dl8ickDVWr2iVt15rl0\npHhwkPSlAgMBAAECggEAH+JWxj6pniegffoSQY7E9JO9Dm1oA6M3g3sOGBcmcMgK\n3y9wyo6xFJb1+Kj4KiCZlenFiNnjBq0ET/kGlODQD5cPdkYto4cKNAEXU3e+se38\n4MlL0UOq6j81z/IppVZqDPPmi4KgU5ELph9jddDvt3vYHg+bY/lfUrwtnhh8DsaN\nqXQoQbPUTt9l74NKVeZiW2so81Eb6nKOi5qn2Swkr6gjDMO5evWrQVgKHU/FKYiN\nxb1hcFyb+ogiJKls/v39o2DUNCWyIJKCOL8DYxD8HWWqSYs/Xl2RIn45V+uh7bD4\nsgdU0yTjpLExEOF4tsUHebtVI9/QRdjgTbagzs+JoQKBgQDg9pELLPlgJr1ciIa6\nW/0kQEYcX8IV2JMwjBdkf2Fop+dU+ytAgdQFSQKMRB/xB8XSsoWSYdbtbj2CT5U4\nLbsCWT1hD3+uM/83zTUumocVtbxt6PnCAjJHwcKZCQq5uvgHamB0NB26BkX6vKbZ\n4CCOahdadaaUw/o943GAz8SbjwKBgQDat0Ul0G1jpaCpv83C2qMBoHF1tel0ui+7\n0lCvSlOWFF+G1hK+XhbjOePEl/Q062/ZURjauiDwb6Kn/QG0aOrFWIDc+YQDK5ba\nUYtU+tPKGweFvIYq5q0PGzViJFNH7VFsj2ZfdM+0LqcUKwcrfxPv1+egoMrxgs2i\nB1Wps6CiiwKBgBv+MoA8gW94gpmwF2u7JJ3NLaw8Mi97up0Q4ZxMyXc3ZW7KrlAh\nl5tswVdo5rycZf5Y3owfhpoW3KqJcp0B+8JIDn40aoPnzntIGrUI34RRD/hxRBrj\nIRSSxL88Q8xmupRZpVTwYz6Rp0WTEgQMgqCWDP/hoe/jDxGCas5HjER7AoGBALqN\n8DEc4vFH6Q5hR8SYcMmGbMCWdZbW6Lgv4BpkL3+nyQNdvYcbAjK2wgyCAA7TcwfO\nIIEQmd/7mKXpLHcRto61utTBD1UU7Qsy2sGVYOjWvUfZUidtstdbweEAUvja98S9\nW/i3ziJGWMTfHrJ/JiZB5pQgEnqFs5gs4Whqiu2ZAoGBAJ3v5oe2LsbOGXirF9kA\nWePsj5KBpCHvywlRX3O64sb4267J6RdVoJjGMmq9aZfthRqAbY7PYTNKHSO7SN/U\nWZP9/lbIsmCo5VcwevHDTlDw08kxXYGrVgv6KKgwshicLyyxJEdlhphHrpEuOooN\nzHzQdjtmOtagjUUruSeQP1iV\n-----END PRIVATE KEY-----\n",
+            "public_key_fingerprint_md5": "4c:ab:9b:cd:83:eb:01:d2:e7:bb:ff:f5:6e:bd:56:b5",
+            "public_key_fingerprint_sha256": "SHA256:N3vGQCKjv2SwfEpb+kw8jaM8EINNdVJgSuWjuCEM52M",
+            "public_key_openssh": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAMwSI4yzyRyxmWOr80mDnJqe0JLI56CaWAYtIRUl21AGtW7zML14TZ0oFoFNViipZXkShO/6Bmij+nmNpeZ4OG3ryATjt1oEblIRYg4ks8XeWp/MP/+j4I2ppTOTcxogVzZkiT8W//DbMFJHsgz0LAnCBB5GygIxvaU8rqHT2dhByirGZSGPKkiEBh8UzQHXKbjUuNQk+hbmnJaminoc1I1Ha0gQeP9KjADRaVWJCpk2ZQwuqtalKSZOGUONeNK0qdGPTv9ZxNtHF3l/XY4UrakdEDWpnk2mzsyBueS0Dt2zjXF5cfPFaJkVk0dl8ickDVWr2iVt15rl0pHhwkPSl\n",
+            "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwDMEiOMs8kcsZljq/NJg\n5yantCSyOegmlgGLSEVJdtQBrVu8zC9eE2dKBaBTVYoqWV5EoTv+gZoo/p5jaXme\nDht68gE47daBG5SEWIOJLPF3lqfzD//o+CNqaUzk3MaIFc2ZIk/Fv/w2zBSR7IM9\nCwJwgQeRsoCMb2lPK6h09nYQcoqxmUhjypIhAYfFM0B1ym41LjUJPoW5pyWpop6H\nNSNR2tIEHj/SowA0WlViQqZNmUMLqrWpSkmThlDjXjStKnRj07/WcTbRxd5f12OF\nK2pHRA1qZ5Nps7MgbnktA7ds41xeXHzxWiZFZNHZfInJA1Vq9olbdea5dKR4cJD0\npQIDAQAB\n-----END PUBLIC KEY-----\n",
+            "rsa_bits": 2048
+          },
+          "sensitive_attributes": [],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "module": "module.alb",
+      "mode": "managed",
+      "type": "aws_lb",
+      "name": "this",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "access_logs": [
+              {
+                "bucket": "",
+                "enabled": false,
+                "prefix": ""
+              }
+            ],
+            "arn": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:loadbalancer/app/test-hblab/8f12adef776d4f9b",
+            "arn_suffix": "app/test-hblab/8f12adef776d4f9b",
+            "customer_owned_ipv4_pool": "",
+            "desync_mitigation_mode": "defensive",
+            "dns_name": "test-hblab-1543258129.ap-northeast-1.elb.amazonaws.com",
+            "drop_invalid_header_fields": false,
+            "enable_cross_zone_load_balancing": true,
+            "enable_deletion_protection": false,
+            "enable_http2": true,
+            "enable_tls_version_and_cipher_suite_headers": false,
+            "enable_waf_fail_open": false,
+            "enable_xff_client_port": true,
+            "id": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:loadbalancer/app/test-hblab/8f12adef776d4f9b",
+            "idle_timeout": 60,
+            "internal": false,
+            "ip_address_type": "ipv4",
+            "load_balancer_type": "application",
+            "name": "test-hblab",
+            "name_prefix": null,
+            "preserve_host_header": false,
+            "security_groups": [
+              "sg-054fb5d15f16f573c",
+              "sg-0ee54f7948a734c18"
+            ],
+            "subnet_mapping": [
+              {
+                "allocation_id": "",
+                "ipv6_address": "",
+                "outpost_id": "",
+                "private_ipv4_address": "",
+                "subnet_id": "subnet-0186a7f4d48d55823"
+              },
+              {
+                "allocation_id": "",
+                "ipv6_address": "",
+                "outpost_id": "",
+                "private_ipv4_address": "",
+                "subnet_id": "subnet-02d7298b72c287737"
+              },
+              {
+                "allocation_id": "",
+                "ipv6_address": "",
+                "outpost_id": "",
+                "private_ipv4_address": "",
+                "subnet_id": "subnet-0579f21ba3dcae70c"
+              }
+            ],
+            "subnets": [
+              "subnet-0186a7f4d48d55823",
+              "subnet-02d7298b72c287737",
+              "subnet-0579f21ba3dcae70c"
+            ],
+            "tags": {
+              "Environment": "dev",
+              "Name": "test-hblab"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "test-hblab"
+            },
+            "timeouts": {
+              "create": "10m",
+              "delete": "10m",
+              "update": "10m"
+            },
+            "vpc_id": "vpc-055e455a5931b6e40",
+            "xff_header_processing_mode": "append",
+            "zone_id": "Z14GRHDCWA56QT"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6NjAwMDAwMDAwMDAwLCJ1cGRhdGUiOjYwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_security_group.alb_sg",
+            "module.alb.aws_security_group.this"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.alb",
+      "mode": "managed",
+      "type": "aws_lb_listener",
+      "name": "frontend_http_tcp",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "alpn_policy": null,
+            "arn": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:listener/app/test-hblab/8f12adef776d4f9b/d5fdb451cf51ba04",
+            "certificate_arn": null,
+            "default_action": [
+              {
+                "authenticate_cognito": [],
+                "authenticate_oidc": [],
+                "fixed_response": [],
+                "forward": [],
+                "order": 1,
+                "redirect": [
+                  {
+                    "host": "#{host}",
+                    "path": "/#{path}",
+                    "port": "443",
+                    "protocol": "HTTPS",
+                    "query": "#{query}",
+                    "status_code": "HTTP_301"
+                  }
+                ],
+                "target_group_arn": "",
+                "type": "redirect"
+              }
+            ],
+            "id": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:listener/app/test-hblab/8f12adef776d4f9b/d5fdb451cf51ba04",
+            "load_balancer_arn": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:loadbalancer/app/test-hblab/8f12adef776d4f9b",
+            "port": 80,
+            "protocol": "HTTP",
+            "ssl_policy": "",
+            "tags": {
+              "Environment": "dev"
+            },
+            "tags_all": {
+              "Environment": "dev"
+            },
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsicmVhZCI6NjAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "aws_key_pair.key_pair",
+            "aws_security_group.alb_sg",
+            "aws_security_group.ec2_sg",
+            "module.alb.aws_lb.this",
+            "module.alb.aws_lb_target_group.main",
+            "module.alb.aws_security_group.this",
+            "module.ec2_instance.aws_iam_instance_profile.this",
+            "module.ec2_instance.aws_iam_role.this",
+            "module.ec2_instance.aws_instance.ignore_ami",
+            "module.ec2_instance.aws_instance.this",
+            "module.ec2_instance.aws_spot_instance_request.this",
+            "module.ec2_instance.data.aws_iam_policy_document.assume_role_policy",
+            "module.ec2_instance.data.aws_partition.current",
+            "module.ec2_instance.data.aws_ssm_parameter.this",
+            "tls_private_key.key"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.alb",
+      "mode": "managed",
+      "type": "aws_lb_listener",
+      "name": "frontend_https",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "alpn_policy": null,
+            "arn": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:listener/app/test-hblab/8f12adef776d4f9b/f3a0fba25260b9b2",
+            "certificate_arn": "arn:aws:acm:ap-northeast-1:185886701365:certificate/2600d11c-fa95-45b7-9aa6-f35e9de56126",
+            "default_action": [
+              {
+                "authenticate_cognito": [],
+                "authenticate_oidc": [],
+                "fixed_response": [
+                  {
+                    "content_type": "text/html",
+                    "message_body": "\u003cbody\u003e\u003cdiv class=\"mainbox\"\u003e\u003cdiv class=\"msgr\"\u003e404\u003c/div\u003e\u003cdiv class=\"msg\"\u003eこのサイトにアクセスできません\u003c/div\u003e\u003c/div\u003e\u003c/body\u003e",
+                    "status_code": "404"
+                  }
+                ],
+                "forward": [],
+                "order": 1,
+                "redirect": [],
+                "target_group_arn": "",
+                "type": "fixed-response"
+              }
+            ],
+            "id": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:listener/app/test-hblab/8f12adef776d4f9b/f3a0fba25260b9b2",
+            "load_balancer_arn": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:loadbalancer/app/test-hblab/8f12adef776d4f9b",
+            "port": 443,
+            "protocol": "HTTPS",
+            "ssl_policy": "ELBSecurityPolicy-2016-08",
+            "tags": {
+              "Environment": "dev"
+            },
+            "tags_all": {
+              "Environment": "dev"
+            },
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsicmVhZCI6NjAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "aws_key_pair.key_pair",
+            "aws_security_group.alb_sg",
+            "aws_security_group.ec2_sg",
+            "module.alb.aws_lb.this",
+            "module.alb.aws_lb_target_group.main",
+            "module.alb.aws_security_group.this",
+            "module.ec2_instance.aws_iam_instance_profile.this",
+            "module.ec2_instance.aws_iam_role.this",
+            "module.ec2_instance.aws_instance.ignore_ami",
+            "module.ec2_instance.aws_instance.this",
+            "module.ec2_instance.aws_spot_instance_request.this",
+            "module.ec2_instance.data.aws_iam_policy_document.assume_role_policy",
+            "module.ec2_instance.data.aws_partition.current",
+            "module.ec2_instance.data.aws_ssm_parameter.this",
+            "tls_private_key.key"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.alb",
+      "mode": "managed",
+      "type": "aws_lb_listener_rule",
+      "name": "https_listener_rule",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "action": [
+              {
+                "authenticate_cognito": [],
+                "authenticate_oidc": [],
+                "fixed_response": [],
+                "forward": [],
+                "order": 1,
+                "redirect": [],
+                "target_group_arn": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:targetgroup/hblab/1df211b4ae49a21f",
+                "type": "forward"
+              }
+            ],
+            "arn": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:listener-rule/app/test-hblab/8f12adef776d4f9b/f3a0fba25260b9b2/c4b648636bac9d72",
+            "condition": [
+              {
+                "host_header": [
+                  {
+                    "values": [
+                      "hblab-test.itoen-shinhaiku.jp"
+                    ]
+                  }
+                ],
+                "http_header": [],
+                "http_request_method": [],
+                "path_pattern": [],
+                "query_string": [],
+                "source_ip": []
+              },
+              {
+                "host_header": [],
+                "http_header": [],
+                "http_request_method": [],
+                "path_pattern": [
+                  {
+                    "values": [
+                      "/pmaitoen/*"
+                    ]
+                  }
+                ],
+                "query_string": [],
+                "source_ip": []
+              }
+            ],
+            "id": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:listener-rule/app/test-hblab/8f12adef776d4f9b/f3a0fba25260b9b2/c4b648636bac9d72",
+            "listener_arn": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:listener/app/test-hblab/8f12adef776d4f9b/f3a0fba25260b9b2",
+            "priority": 1,
+            "tags": {
+              "Environment": "dev"
+            },
+            "tags_all": {
+              "Environment": "dev"
+            }
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_key_pair.key_pair",
+            "aws_security_group.alb_sg",
+            "aws_security_group.ec2_sg",
+            "module.alb.aws_lb.this",
+            "module.alb.aws_lb_listener.frontend_https",
+            "module.alb.aws_lb_target_group.main",
+            "module.alb.aws_security_group.this",
+            "module.ec2_instance.aws_iam_instance_profile.this",
+            "module.ec2_instance.aws_iam_role.this",
+            "module.ec2_instance.aws_instance.ignore_ami",
+            "module.ec2_instance.aws_instance.this",
+            "module.ec2_instance.aws_spot_instance_request.this",
+            "module.ec2_instance.data.aws_iam_policy_document.assume_role_policy",
+            "module.ec2_instance.data.aws_partition.current",
+            "module.ec2_instance.data.aws_ssm_parameter.this",
+            "tls_private_key.key"
+          ]
+        },
+        {
+          "index_key": 1,
+          "schema_version": 0,
+          "attributes": {
+            "action": [
+              {
+                "authenticate_cognito": [],
+                "authenticate_oidc": [],
+                "fixed_response": [
+                  {
+                    "content_type": "text/plain",
+                    "message_body": "",
+                    "status_code": "503"
+                  }
+                ],
+                "forward": [],
+                "order": 1,
+                "redirect": [],
+                "target_group_arn": "",
+                "type": "fixed-response"
+              }
+            ],
+            "arn": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:listener-rule/app/test-hblab/8f12adef776d4f9b/f3a0fba25260b9b2/54491ad93c87a2fe",
+            "condition": [
+              {
+                "host_header": [],
+                "http_header": [],
+                "http_request_method": [],
+                "path_pattern": [
+                  {
+                    "values": [
+                      "/pmaitoen/*"
+                    ]
+                  }
+                ],
+                "query_string": [],
+                "source_ip": []
+              }
+            ],
+            "id": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:listener-rule/app/test-hblab/8f12adef776d4f9b/f3a0fba25260b9b2/54491ad93c87a2fe",
+            "listener_arn": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:listener/app/test-hblab/8f12adef776d4f9b/f3a0fba25260b9b2",
+            "priority": 2,
+            "tags": {
+              "Environment": "dev"
+            },
+            "tags_all": {
+              "Environment": "dev"
+            }
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_key_pair.key_pair",
+            "aws_security_group.alb_sg",
+            "aws_security_group.ec2_sg",
+            "module.alb.aws_lb.this",
+            "module.alb.aws_lb_listener.frontend_https",
+            "module.alb.aws_lb_target_group.main",
+            "module.alb.aws_security_group.this",
+            "module.ec2_instance.aws_iam_instance_profile.this",
+            "module.ec2_instance.aws_iam_role.this",
+            "module.ec2_instance.aws_instance.ignore_ami",
+            "module.ec2_instance.aws_instance.this",
+            "module.ec2_instance.aws_spot_instance_request.this",
+            "module.ec2_instance.data.aws_iam_policy_document.assume_role_policy",
+            "module.ec2_instance.data.aws_partition.current",
+            "module.ec2_instance.data.aws_ssm_parameter.this",
+            "tls_private_key.key"
+          ]
+        },
+        {
+          "index_key": 2,
+          "schema_version": 0,
+          "attributes": {
+            "action": [
+              {
+                "authenticate_cognito": [],
+                "authenticate_oidc": [],
+                "fixed_response": [],
+                "forward": [],
+                "order": 1,
+                "redirect": [],
+                "target_group_arn": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:targetgroup/hblab/1df211b4ae49a21f",
+                "type": "forward"
+              }
+            ],
+            "arn": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:listener-rule/app/test-hblab/8f12adef776d4f9b/f3a0fba25260b9b2/b863308e186deb50",
+            "condition": [
+              {
+                "host_header": [
+                  {
+                    "values": [
+                      "hblab-test.itoen-shinhaiku.jp"
+                    ]
+                  }
+                ],
+                "http_header": [],
+                "http_request_method": [],
+                "path_pattern": [],
+                "query_string": [],
+                "source_ip": []
+              }
+            ],
+            "id": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:listener-rule/app/test-hblab/8f12adef776d4f9b/f3a0fba25260b9b2/b863308e186deb50",
+            "listener_arn": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:listener/app/test-hblab/8f12adef776d4f9b/f3a0fba25260b9b2",
+            "priority": 3,
+            "tags": {
+              "Environment": "dev"
+            },
+            "tags_all": {
+              "Environment": "dev"
+            }
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_key_pair.key_pair",
+            "aws_security_group.alb_sg",
+            "aws_security_group.ec2_sg",
+            "module.alb.aws_lb.this",
+            "module.alb.aws_lb_listener.frontend_https",
+            "module.alb.aws_lb_target_group.main",
+            "module.alb.aws_security_group.this",
+            "module.ec2_instance.aws_iam_instance_profile.this",
+            "module.ec2_instance.aws_iam_role.this",
+            "module.ec2_instance.aws_instance.ignore_ami",
+            "module.ec2_instance.aws_instance.this",
+            "module.ec2_instance.aws_spot_instance_request.this",
+            "module.ec2_instance.data.aws_iam_policy_document.assume_role_policy",
+            "module.ec2_instance.data.aws_partition.current",
+            "module.ec2_instance.data.aws_ssm_parameter.this",
+            "tls_private_key.key"
+          ]
+        },
+        {
+          "index_key": 3,
+          "schema_version": 0,
+          "attributes": {
+            "action": [
+              {
+                "authenticate_cognito": [],
+                "authenticate_oidc": [],
+                "fixed_response": [],
+                "forward": [],
+                "order": 1,
+                "redirect": [],
+                "target_group_arn": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:targetgroup/hblab/1df211b4ae49a21f",
+                "type": "forward"
+              }
+            ],
+            "arn": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:listener-rule/app/test-hblab/8f12adef776d4f9b/f3a0fba25260b9b2/163389c028f20c05",
+            "condition": [
+              {
+                "host_header": [
+                  {
+                    "values": [
+                      "test.itoen-shinhaiku.jp"
+                    ]
+                  }
+                ],
+                "http_header": [],
+                "http_request_method": [],
+                "path_pattern": [],
+                "query_string": [],
+                "source_ip": []
+              }
+            ],
+            "id": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:listener-rule/app/test-hblab/8f12adef776d4f9b/f3a0fba25260b9b2/163389c028f20c05",
+            "listener_arn": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:listener/app/test-hblab/8f12adef776d4f9b/f3a0fba25260b9b2",
+            "priority": 4,
+            "tags": {
+              "Environment": "dev"
+            },
+            "tags_all": {
+              "Environment": "dev"
+            }
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_key_pair.key_pair",
+            "aws_security_group.alb_sg",
+            "aws_security_group.ec2_sg",
+            "module.alb.aws_lb.this",
+            "module.alb.aws_lb_listener.frontend_https",
+            "module.alb.aws_lb_target_group.main",
+            "module.alb.aws_security_group.this",
+            "module.ec2_instance.aws_iam_instance_profile.this",
+            "module.ec2_instance.aws_iam_role.this",
+            "module.ec2_instance.aws_instance.ignore_ami",
+            "module.ec2_instance.aws_instance.this",
+            "module.ec2_instance.aws_spot_instance_request.this",
+            "module.ec2_instance.data.aws_iam_policy_document.assume_role_policy",
+            "module.ec2_instance.data.aws_partition.current",
+            "module.ec2_instance.data.aws_ssm_parameter.this",
+            "tls_private_key.key"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.alb",
+      "mode": "managed",
+      "type": "aws_lb_target_group",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:targetgroup/hblab/1df211b4ae49a21f",
+            "arn_suffix": "targetgroup/hblab/1df211b4ae49a21f",
+            "connection_termination": false,
+            "deregistration_delay": "300",
+            "health_check": [
+              {
+                "enabled": true,
+                "healthy_threshold": 5,
+                "interval": 30,
+                "matcher": "200",
+                "path": "/",
+                "port": "traffic-port",
+                "protocol": "HTTP",
+                "timeout": 5,
+                "unhealthy_threshold": 2
+              }
+            ],
+            "id": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:targetgroup/hblab/1df211b4ae49a21f",
+            "ip_address_type": "ipv4",
+            "lambda_multi_value_headers_enabled": false,
+            "load_balancing_algorithm_type": "round_robin",
+            "load_balancing_cross_zone_enabled": "use_load_balancer_configuration",
+            "name": "hblab",
+            "name_prefix": null,
+            "port": 80,
+            "preserve_client_ip": null,
+            "protocol": "HTTP",
+            "protocol_version": "HTTP1",
+            "proxy_protocol_v2": false,
+            "slow_start": 0,
+            "stickiness": [
+              {
+                "cookie_duration": 86400,
+                "cookie_name": "",
+                "enabled": false,
+                "type": "lb_cookie"
+              }
+            ],
+            "tags": {
+              "Environment": "dev",
+              "Name": "hblab"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "hblab"
+            },
+            "target_failover": [
+              {
+                "on_deregistration": null,
+                "on_unhealthy": null
+              }
+            ],
+            "target_type": "instance",
+            "vpc_id": "vpc-055e455a5931b6e40"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_key_pair.key_pair",
+            "aws_security_group.alb_sg",
+            "aws_security_group.ec2_sg",
+            "module.ec2_instance.aws_iam_instance_profile.this",
+            "module.ec2_instance.aws_iam_role.this",
+            "module.ec2_instance.aws_instance.ignore_ami",
+            "module.ec2_instance.aws_instance.this",
+            "module.ec2_instance.aws_spot_instance_request.this",
+            "module.ec2_instance.data.aws_iam_policy_document.assume_role_policy",
+            "module.ec2_instance.data.aws_partition.current",
+            "module.ec2_instance.data.aws_ssm_parameter.this",
+            "tls_private_key.key"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "module": "module.alb",
+      "mode": "managed",
+      "type": "aws_lb_target_group_attachment",
+      "name": "this",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": "0.my_target",
+          "schema_version": 0,
+          "attributes": {
+            "availability_zone": null,
+            "id": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:targetgroup/hblab/1df211b4ae49a21f-20230908104859240700000001",
+            "port": 80,
+            "target_group_arn": "arn:aws:elasticloadbalancing:ap-northeast-1:185886701365:targetgroup/hblab/1df211b4ae49a21f",
+            "target_id": "i-07b5416e8a4b9bd02"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_key_pair.key_pair",
+            "aws_security_group.alb_sg",
+            "aws_security_group.ec2_sg",
+            "module.alb.aws_lambda_permission.lb",
+            "module.alb.aws_lb_target_group.main",
+            "module.ec2_instance.aws_iam_instance_profile.this",
+            "module.ec2_instance.aws_iam_role.this",
+            "module.ec2_instance.aws_instance.ignore_ami",
+            "module.ec2_instance.aws_instance.this",
+            "module.ec2_instance.aws_spot_instance_request.this",
+            "module.ec2_instance.data.aws_iam_policy_document.assume_role_policy",
+            "module.ec2_instance.data.aws_partition.current",
+            "module.ec2_instance.data.aws_ssm_parameter.this",
+            "tls_private_key.key"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.alb",
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "this",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:ap-northeast-1:185886701365:security-group/sg-0ee54f7948a734c18",
+            "description": "Managed by Terraform",
+            "egress": [],
+            "id": "sg-0ee54f7948a734c18",
+            "ingress": [],
+            "name": "test-hblab-20230908102512114300000001",
+            "name_prefix": "test-hblab-",
+            "owner_id": "185886701365",
+            "revoke_rules_on_delete": false,
+            "tags": {
+              "Environment": "dev",
+              "Name": "test-hblab"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "test-hblab"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-055e455a5931b6e40"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "module": "module.ec2_instance",
+      "mode": "data",
+      "type": "aws_partition",
+      "name": "current",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "dns_suffix": "amazonaws.com",
+            "id": "aws",
+            "partition": "aws",
+            "reverse_dns_prefix": "com.amazonaws"
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "module": "module.ec2_instance",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "this",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 1,
+          "attributes": {
+            "ami": "ami-07d6bd9a28134d3b3",
+            "arn": "arn:aws:ec2:ap-northeast-1:185886701365:instance/i-07b5416e8a4b9bd02",
+            "associate_public_ip_address": true,
+            "availability_zone": "ap-northeast-1d",
+            "capacity_reservation_specification": [
+              {
+                "capacity_reservation_preference": "open",
+                "capacity_reservation_target": []
+              }
+            ],
+            "cpu_core_count": 1,
+            "cpu_options": [
+              {
+                "amd_sev_snp": "",
+                "core_count": 1,
+                "threads_per_core": 2
+              }
+            ],
+            "cpu_threads_per_core": 2,
+            "credit_specification": [
+              {
+                "cpu_credits": "unlimited"
+              }
+            ],
+            "disable_api_stop": false,
+            "disable_api_termination": false,
+            "ebs_block_device": [
+              {
+                "delete_on_termination": true,
+                "device_name": "/dev/xvda",
+                "encrypted": false,
+                "iops": 100,
+                "kms_key_id": "",
+                "snapshot_id": "",
+                "tags": {},
+                "throughput": 0,
+                "volume_id": "vol-0bd4657d03b5c492e",
+                "volume_size": 8,
+                "volume_type": "gp2"
+              }
+            ],
+            "ebs_optimized": false,
+            "enclave_options": [
+              {
+                "enabled": false
+              }
+            ],
+            "ephemeral_block_device": [],
+            "get_password_data": false,
+            "hibernation": false,
+            "host_id": "",
+            "host_resource_group_arn": null,
+            "iam_instance_profile": "",
+            "id": "i-07b5416e8a4b9bd02",
+            "instance_initiated_shutdown_behavior": "stop",
+            "instance_lifecycle": "",
+            "instance_market_options": [],
+            "instance_state": "running",
+            "instance_type": "t3.micro",
+            "ipv6_address_count": 0,
+            "ipv6_addresses": [],
+            "key_name": "test-hblab",
+            "launch_template": [],
+            "maintenance_options": [
+              {
+                "auto_recovery": "default"
+              }
+            ],
+            "metadata_options": [
+              {
+                "http_endpoint": "enabled",
+                "http_protocol_ipv6": "disabled",
+                "http_put_response_hop_limit": 1,
+                "http_tokens": "optional",
+                "instance_metadata_tags": "disabled"
+              }
+            ],
+            "monitoring": false,
+            "network_interface": [],
+            "outpost_arn": "",
+            "password_data": "",
+            "placement_group": "",
+            "placement_partition_number": 0,
+            "primary_network_interface_id": "eni-0211357bc7546b183",
+            "private_dns": "ip-172-31-30-243.ap-northeast-1.compute.internal",
+            "private_dns_name_options": [
+              {
+                "enable_resource_name_dns_a_record": false,
+                "enable_resource_name_dns_aaaa_record": false,
+                "hostname_type": "ip-name"
+              }
+            ],
+            "private_ip": "172.31.30.243",
+            "public_dns": "ec2-52-69-108-123.ap-northeast-1.compute.amazonaws.com",
+            "public_ip": "52.69.108.123",
+            "root_block_device": [
+              {
+                "delete_on_termination": true,
+                "device_name": "/dev/xvda",
+                "encrypted": false,
+                "iops": 100,
+                "kms_key_id": "",
+                "tags": {},
+                "throughput": 0,
+                "volume_id": "vol-0bd4657d03b5c492e",
+                "volume_size": 20,
+                "volume_type": "gp2"
+              }
+            ],
+            "secondary_private_ips": [],
+            "security_groups": [
+              "ec2_sg"
+            ],
+            "source_dest_check": true,
+            "spot_instance_request_id": "",
+            "subnet_id": "subnet-0579f21ba3dcae70c",
+            "tags": {
+              "Environment": "dev",
+              "Name": "test-hblab",
+              "Terraform": "true"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "test-hblab",
+              "Terraform": "true"
+            },
+            "tenancy": "default",
+            "timeouts": {
+              "create": null,
+              "delete": null,
+              "update": null
+            },
+            "user_data": null,
+            "user_data_base64": null,
+            "user_data_replace_on_change": false,
+            "volume_tags": {
+              "Name": "test-hblab"
+            },
+            "vpc_security_group_ids": [
+              "sg-008920b9c161d7093"
+            ]
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMCwidXBkYXRlIjo2MDAwMDAwMDAwMDB9LCJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_key_pair.key_pair",
+            "aws_security_group.ec2_sg",
+            "module.ec2_instance.aws_iam_instance_profile.this",
+            "module.ec2_instance.data.aws_ssm_parameter.this"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.records",
+      "mode": "data",
+      "type": "aws_route53_zone",
+      "name": "this",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:route53:::hostedzone/Z0664916JZ5GIOYEK4TQ",
+            "caller_reference": "7714f6d5-b3f9-4f2a-b583-f45c31b29608",
+            "comment": "",
+            "id": "Z0664916JZ5GIOYEK4TQ",
+            "linked_service_description": null,
+            "linked_service_principal": null,
+            "name": "itoen-shinhaiku.jp",
+            "name_servers": [
+              "ns-127.awsdns-15.com",
+              "ns-1396.awsdns-46.org",
+              "ns-693.awsdns-22.net",
+              "ns-1661.awsdns-15.co.uk"
+            ],
+            "primary_name_server": "ns-127.awsdns-15.com",
+            "private_zone": false,
+            "resource_record_set_count": 10,
+            "tags": {},
+            "vpc_id": null,
+            "zone_id": "Z0664916JZ5GIOYEK4TQ"
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "module": "module.records",
+      "mode": "managed",
+      "type": "aws_route53_record",
+      "name": "this",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": "hblab-test CNAME",
+          "schema_version": 2,
+          "attributes": {
+            "alias": [],
+            "allow_overwrite": false,
+            "cidr_routing_policy": [],
+            "failover_routing_policy": [],
+            "fqdn": "hblab-test.itoen-shinhaiku.jp",
+            "geolocation_routing_policy": [],
+            "health_check_id": "",
+            "id": "Z0664916JZ5GIOYEK4TQ_hblab-test.itoen-shinhaiku.jp_CNAME",
+            "latency_routing_policy": [],
+            "multivalue_answer_routing_policy": false,
+            "name": "hblab-test.itoen-shinhaiku.jp",
+            "records": [
+              "test-hblab-1543258129.ap-northeast-1.elb.amazonaws.com"
+            ],
+            "set_identifier": "",
+            "ttl": 300,
+            "type": "CNAME",
+            "weighted_routing_policy": [],
+            "zone_id": "Z0664916JZ5GIOYEK4TQ"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjIifQ==",
+          "dependencies": [
+            "module.records.data.aws_route53_zone.this"
+          ]
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}
