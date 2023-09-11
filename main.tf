@@ -20,4 +20,5 @@ module "alb_module" {
 
 module "route53" {
     source = "./module/route53-module"
+    alb_dns_name = module.alb_module.lb_dns_name
 }
