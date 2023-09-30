@@ -11,6 +11,13 @@ module "records" {
       ttl     = 300
       records = ["test-hblab-1543258129.ap-northeast-1.elb.amazonaws.com"]
       # records = [ module.alb.lb_dns_name ]
+    },
+    {
+      name    = "hblab-test-cpi"
+      type    = "CNAME"
+      ttl     = 300
+      records = ["test-hblab-1543258129.ap-northeast-1.elb.amazonaws.com"]
+      # records = [ module.alb.lb_dns_name ]
     }
   ]
 
