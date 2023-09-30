@@ -10,6 +10,12 @@ module "records" {
       type    = "CNAME"
       ttl     = 300
       records = ["test-hblab-1543258129.ap-northeast-1.elb.amazonaws.com"]
+    },
+    {
+      name    = "hblab-test-cpi"
+      type    = "CNAME"
+      ttl     = 300
+      records = ["test-hblab-1543258129.ap-northeast-1.elb.amazonaws.com"]
     }
   ]
 

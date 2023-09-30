@@ -1,3 +1,3 @@
 output "ec2_instance_id" {
-  value = module.ec2_instance.id
+  value = [for instance in module.ec2_instance : instance.id]
 }

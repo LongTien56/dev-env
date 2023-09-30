@@ -15,8 +15,8 @@ variable "subnets_id" {
 }
 
 variable "ec2_instance_id"{
-  description = "sg id"
-  type        = string
+  description = "ec2 id"
+  type        = list(string)
 }
 
 

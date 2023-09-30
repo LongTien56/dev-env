@@ -21,7 +21,20 @@ module "alb" {
       target_type      = "instance"
       targets = {
         my_target = {
-          target_id = var.ec2_instance_id
+          target_id = var.ec2_instance_id[0]
+          port = 80
+        }
+      }
+    },
+
+    {
+      name     = "hblab-test-cpi"
+      backend_protocol = "HTTP"
+      backend_port     = 80
+      target_type      = "instance"
+      targets = {
+        my_target = {
+          target_id = var.ec2_instance_id[1]
           port = 80
         }
       }
@@ -125,6 +138,21 @@ module "alb" {
           host_headers = ["hblab-test.itoen-shinhaiku.jp"]
       }]
     },
+
+    {
+      https_listener_index = 0
+      priority             = 5
+
+      actions = [{
+        type        = "forward"
+        target_group_index = 1
+      }]
+
+      conditions = [{
+          host_headers = ["hblab-test-cpi.itoen-shinhaiku.jp"]
+      }]
+    },
+
 
     {
       https_listener_index = 0
